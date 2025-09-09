@@ -1,6 +1,7 @@
 package com.vasicj.basicsparktuning.fifa
 
 import com.vasicj.basicsparktuning.fifa.analyse.TransformAndAnalyse
+import com.vasicj.basicsparktuning.fifa.analyse.TransformAndAnalyse.Stats
 import com.vasicj.basicsparktuning.fifa.ingest.IngestIntoDF
 import com.vasicj.basicsparktuning.fifa.store.StoreIntoFile
 import org.apache.spark.SparkConf
@@ -12,6 +13,7 @@ object FifaApp extends App {
   val path = "datasets/fifa/FIFA-21Complete.csv"
   val storePath = "datasets/fifa/outputFile"
   val e: DataFrame = IngestIntoDF.ingest(path)
-  val t = TransformAndAnalyse.stats(e)
-  StoreIntoFile.store(t, storePath)
+  val t: List[Stats] = TransformAndAnalyse.stats(e)
+  val l: Unit = StoreIntoFile.store(t, storePath)
+  l
 }
