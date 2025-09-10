@@ -14,6 +14,9 @@ object FifaApp extends App {
   val storePath = "datasets/fifa/outputFile"
   val e: DataFrame = IngestIntoDF.ingest(path)
   val t: List[Stats] = TransformAndAnalyse.stats(e)
+  val k = TransformAndAnalyse.positionByNation(e)
   val l: Unit = StoreIntoFile.store(t, storePath)
-  l
+  val f = StoreIntoFile.storeDefensiveness(k, storePath + "1")
+
+  ()
 }
